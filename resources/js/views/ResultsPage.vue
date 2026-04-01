@@ -20,6 +20,33 @@
       </div>
     </div>
 
+    <!-- Password gate (direct link only) -->
+    <div v-else-if="showPasswordGate" class="flex flex-col items-center justify-center min-h-[70vh] gap-6 px-4">
+      <div class="bg-slate-900/70 border border-slate-700/50 rounded-2xl p-8 w-full max-w-sm text-center shadow-2xl backdrop-blur-sm">
+        <div class="text-4xl mb-4">🔒</div>
+        <h2 class="text-white font-bold text-xl mb-2">Results Protected</h2>
+        <p class="text-slate-400 text-sm mb-6">Enter the password to view this assessment.</p>
+        <form @submit.prevent="submitPassword">
+          <input
+            v-model="passwordInput"
+            type="password"
+            placeholder="Password"
+            autocomplete="current-password"
+            class="w-full bg-slate-800 border border-slate-600 rounded-xl px-4 py-3 text-white placeholder-slate-500 focus:outline-none focus:border-blue-500 mb-3"
+          />
+          <p v-if="passwordError" class="text-red-400 text-sm mb-3">{{ passwordError }}</p>
+          <button
+            type="submit"
+            :disabled="loading"
+            class="w-full bg-blue-600 hover:bg-blue-700 disabled:opacity-50 text-white font-bold py-3 rounded-xl transition"
+          >
+            <span v-if="loading">Verifying…</span>
+            <span v-else>View Results</span>
+          </button>
+        </form>
+      </div>
+    </div>
+
     <!-- Error state -->
     <div v-else-if="!result" class="flex flex-col items-center justify-center min-h-[70vh] gap-4">
       <div class="text-6xl">⚠️</div>
@@ -409,6 +436,9 @@ const loading          = ref(false)
 const emailSentSuccess = ref(false)
 const emailError       = ref(null)
 const sendingEmail     = ref(false)
+const showPasswordGate = ref(false)
+const passwordInput    = ref('')
+const passwordError    = ref(null)
 
 const PASSWORD_ATTRS = ['passwords', 'password']
 const SENSITIVE_ATTRS = ['credit cards', 'social security numbers', 'ssn', 'bank account numbers', 'passport numbers', 'health records', 'medical records']
@@ -429,19 +459,38 @@ function sortedAttrs(attrs) {
 
 const result = computed(() => store.result)
 
+async function fetchResult(password = null) {
+  loading.value = true
+  passwordError.value = null
+  try {
+    const headers = password ? { 'X-Results-Password': password } : {}
+    const { data } = await axios.get(`/api/assessments/${props.id}`, { headers })
+    store.result = data
+    showPasswordGate.value = false
+  } catch (err) {
+    if (err.response?.status === 401) {
+      showPasswordGate.value = true
+    } else {
+      router.push({ name: 'landing' })
+    }
+  } finally {
+    loading.value = false
+  }
+}
+
+async function submitPassword() {
+  if (!passwordInput.value) return
+  await fetchResult(passwordInput.value)
+  if (showPasswordGate.value) {
+    passwordError.value = 'Incorrect password. Please try again.'
+    passwordInput.value = ''
+  }
+}
+
 onMounted(async () => {
   if (!store.result) {
     if (props.id) {
-      // Navigated directly or page refreshed — load from API
-      loading.value = true
-      try {
-        const { data } = await axios.get(`/api/assessments/${props.id}`)
-        store.result = data
-      } catch {
-        router.push({ name: 'landing' })
-      } finally {
-        loading.value = false
-      }
+      await fetchResult()
     } else {
       router.push({ name: 'landing' })
     }

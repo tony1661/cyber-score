@@ -89,8 +89,16 @@ class AssessmentController extends Controller
         }
     }
 
-    public function show(Submission $submission): JsonResponse
+    public function show(Submission $submission, Request $request): JsonResponse
     {
+        $requiredPassword = env('RESULTS_PASSWORD');
+        if (!empty($requiredPassword)) {
+            $provided = $request->header('X-Results-Password');
+            if (!hash_equals($requiredPassword, (string) $provided)) {
+                return response()->json(['message' => 'Password required.'], 401);
+            }
+        }
+
         $submission->load(['categoryScores', 'breachEvents', 'dnsResult']);
 
         // Rebuild categories array from persisted scores

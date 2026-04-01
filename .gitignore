@@ -37,3 +37,11 @@ obj/
 database/database.sqlite
 database/database.sqlite-shm
 database/database.sqlite-wal
+
+# Laravel runtime storage (generated at runtime, never commit)
+storage/framework/sessions/*
+storage/framework/cache/*
+storage/framework/views/*
+storage/logs/*
+storage/app/public/*
+bootstrap/cache/*

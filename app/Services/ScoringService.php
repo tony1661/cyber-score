@@ -366,6 +366,16 @@ class ScoringService
         return $this->weights;
     }
 
+    public function statusForScore(int $score): string
+    {
+        return match(true) {
+            $score >= 80 => 'pass',
+            $score >= 60 => 'warn',
+            $score >= 40 => 'warn',
+            default      => 'fail',
+        };
+    }
+
     public function categoryLabels(): array
     {
         return [

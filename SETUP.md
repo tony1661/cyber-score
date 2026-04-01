@@ -1,231 +1,181 @@
-# Email Exposure Assessment — Setup Guide
+# Cyber Score — Setup Guide
 
-## Prerequisites
+## 1 — System dependencies
 
-| Requirement | Minimum version |
-|---|---|
-| PHP | 8.2+ |
-| Composer | 2.x |
-| Node.js | 18+ |
-| npm | 9+ |
-| MySQL | 8.0+ (or use SQLite for dev) |
-
----
-
-## 1. Scaffold Laravel skeleton files
-
-This repo contains only the custom application files. The Laravel framework skeleton
-(`artisan`, `bootstrap/`, `public/`, `storage/`, core `config/`, etc.) must be copied in
-from a fresh Laravel 11 project **without overwriting the custom files**:
+Run as **root** (or with `sudo`):
 
 ```bash
-# 1a. Scaffold a fresh Laravel project in /tmp
-composer create-project laravel/laravel /tmp/laravel-fresh --prefer-dist --quiet
+apt update && apt install -y \
+  git curl unzip sqlite3 \
+  php8.4 php8.4-cli php8.4-fpm php8.4-sqlite3 \
+  php8.4-mbstring php8.4-xml php8.4-curl php8.4-zip \
+  nginx
 
-# 1b. Copy only the missing skeleton files (does NOT overwrite our custom files)
-cp    /tmp/laravel-fresh/artisan        .
-cp    /tmp/laravel-fresh/phpunit.xml    .
-cp -r /tmp/laravel-fresh/bootstrap     .
-cp -r /tmp/laravel-fresh/public        .
-cp -r /tmp/laravel-fresh/storage       .
-cp -r /tmp/laravel-fresh/tests         .
-cp -r /tmp/laravel-fresh/app/Providers app/
-cp -rn /tmp/laravel-fresh/app/Http/Middleware app/Http/
+# Composer
+curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
-# Core config files not included in this repo
-for f in app auth cache database filesystems logging queue session; do
-  cp /tmp/laravel-fresh/config/${f}.php config/
-done
-
-# Database factories and seeders
-cp -r /tmp/laravel-fresh/database/factories database/
-cp -r /tmp/laravel-fresh/database/seeders   database/
-
-# 1c. Install PHP dependencies
-composer install
+# Node 20
+curl -fsSL https://deb.nodesource.com/setup_20.x | bash -
+apt install -y nodejs
 ```
 
-Verify it worked:
+## 2 — Create a dedicated app user
+
 ```bash
-php artisan --version
-# Laravel Framework 11.x.x
+# Create user and home directory
+useradd -m -s /bin/bash cyberapp
+
+# Allow the user to write to the web root
+mkdir -p /var/www/cyber-score
+chown cyberapp:cyberapp /var/www/cyber-score
+
+# Allow www-data (nginx/php-fpm) to read app files
+usermod -aG cyberapp www-data
 ```
 
----
+## 3 — Clone and configure
 
-## 2. Environment configuration
+**Switch to the app user for all remaining steps:**
 
 ```bash
+su - cyberapp
+```
+
+```bash
+git clone https://github.com/tony1661/cyber-score /var/www/cyber-score
+cd /var/www/cyber-score
+
 cp .env.example .env
-php artisan key:generate
 ```
 
-Then edit `.env` and fill in:
+Edit `.env` and fill in:
 
-```dotenv
-# Database
-DB_CONNECTION=mysql
-DB_HOST=127.0.0.1
-DB_PORT=3306
-DB_DATABASE=cyber_score
-DB_USERNAME=root
-DB_PASSWORD=your_password
+```ini
+APP_ENV=production
+APP_DEBUG=false
+APP_URL=https://yourdomain.com
 
-# XposedOrNot paid API — https://plus.xposedornot.com
-XPOSEDORNOT_API_KEY=your-api-key-here
+XPOSEDORNOT_API_KEY=your-key-here
 
-# SMTP / Mailgun (or any Laravel-supported driver)
-MAIL_MAILER=smtp
-MAIL_HOST=smtp.mailgun.org
+MAIL_HOST=mail.smtp2go.com
 MAIL_PORT=587
-MAIL_USERNAME=your_smtp_user
-MAIL_PASSWORD=your_smtp_password
-MAIL_FROM_ADDRESS=assessment@yourdomain.com
-MAIL_FROM_NAME="Email Exposure Assessment"
+MAIL_USERNAME=your-smtp-username
+MAIL_PASSWORD=your-smtp-password
+MAIL_FROM_ADDRESS="assessment@yourdomain.com"
 
-# Sales rep CC — this address is copied on every emailed report
-SALES_REP_EMAIL=tony@meteortel.com
+SALES_REP_EMAIL=sales@yourdomain.com
+DISCOVERY_CALL_URL=https://yourdomain.com/discovery-call/
 ```
 
-### SQLite (quick dev setup — no MySQL needed)
+## 4 — Install & build
 
-```dotenv
-DB_CONNECTION=sqlite
-# leave DB_DATABASE blank — SQLite file is created automatically
+```bash
+composer install --no-dev --optimize-autoloader
+php artisan key:generate
+php artisan migrate --force
+
+npm ci
+npm run build
+```
+
+## 5 — Storage permissions
+
+```bash
+# Still as cyberapp — own the storage dirs
+chmod -R 775 /var/www/cyber-score/storage \
+              /var/www/cyber-score/bootstrap/cache \
+              /var/www/cyber-score/database
+
+# php-fpm runs as www-data, which was added to the cyberapp group above
+# so it can read/write storage without needing root
+```
+
+Exit back to root:
+
+```bash
+exit
+```
+
+## 6 — PHP-FPM pool
+
+Create a dedicated pool so php-fpm runs as `cyberapp` instead of `www-data`:
+
+```ini
+# /etc/php/8.4/fpm/pool.d/cyberapp.conf
+[cyberapp]
+user  = cyberapp
+group = cyberapp
+listen = /run/php/php8.4-cyberapp.sock
+listen.owner = www-data
+listen.group = www-data
+pm = dynamic
+pm.max_children = 10
+pm.start_servers = 2
+pm.min_spare_servers = 1
+pm.max_spare_servers = 3
 ```
 
 ```bash
-touch database/database.sqlite
+systemctl restart php8.4-fpm
 ```
 
----
+## 7 — Nginx config
 
-## 3. Database
+```nginx
+# /etc/nginx/sites-available/cyber-score
+server {
+    listen 80;
+    server_name yourdomain.com;
+    root /var/www/cyber-score/public;
+    index index.php;
+
+    location / {
+        try_files $uri $uri/ /index.php?$query_string;
+    }
+
+    location ~ \.php$ {
+        # Use the cyberapp pool socket if you created one (step 6),
+        # otherwise fall back to the default www-data socket
+        fastcgi_pass unix:/run/php/php8.4-cyberapp.sock;
+        fastcgi_param SCRIPT_FILENAME $realpath_root$fastcgi_script_name;
+        include fastcgi_params;
+    }
+
+    location ~ /\.(?!well-known).* {
+        deny all;
+    }
+}
+```
 
 ```bash
-php artisan migrate
+ln -s /etc/nginx/sites-available/cyber-score /etc/nginx/sites-enabled/
+nginx -t && systemctl reload nginx
 ```
 
-This creates five tables: `submissions`, `category_scores`, `breach_events`,
-`dns_results`, and `email_deliveries`.
-
----
-
-## 4. Front-end assets
+## 8 — Cache for production
 
 ```bash
-npm install
-npm run build       # production build
-# or
-npm run dev         # hot-reload dev server (Vite)
+su - cyberapp -c "cd /var/www/cyber-score && php artisan config:cache && php artisan route:cache && php artisan view:cache"
 ```
 
----
-
-## 5. Run the application
+## 9 — HTTPS with Let's Encrypt
 
 ```bash
-# Development (two terminals)
-php artisan serve       # terminal 1 — Laravel on http://localhost:8000
-npm run dev             # terminal 2 — Vite hot reload
-
-# Or with Laravel Sail (Docker)
-./vendor/bin/sail up
-./vendor/bin/sail npm run dev
-```
-
-Open **http://localhost:8000** in your browser.
-
----
-
-## 6. Testing email delivery locally
-
-During development, switch to the `log` mail driver so emails are written to
-`storage/logs/laravel.log` instead of being sent:
-
-```dotenv
-MAIL_MAILER=log
-```
-
-Or use **Mailpit** (bundled with Laravel Sail) for a local SMTP inbox:
-
-```dotenv
-MAIL_MAILER=smtp
-MAIL_HOST=127.0.0.1
-MAIL_PORT=1025
-```
-
-Mailpit UI: http://localhost:8025
-
----
-
-## 7. XposedOrNot API key
-
-Sign up for a paid plan at https://plus.xposedornot.com, then set `XPOSEDORNOT_API_KEY`
-in `.env`.
-
-The app handles API errors gracefully — if the key is missing or the API is down,
-breach checks will show as "unavailable" and category scores will be marked conservatively.
-
----
-
-## Application structure
-
-```
-app/
-  Http/Controllers/
-    AssessmentController.php   — POST /api/assessments, GET /api/assessments/{id}
-    ReportEmailController.php  — POST /api/assessments/{id}/email-report
-  Services/
-    XposedOrNotService.php     — Breach/exposure API calls
-    DnsCheckService.php        — SPF / DKIM / DMARC lookups
-    ScoringService.php         — Weighted scoring + gating caps
-    ReportEmailService.php     — Sends HTML email report
-  Models/
-    Submission.php             — Top-level assessment record
-    CategoryScore.php          — Per-category scores + rationale
-    BreachEvent.php            — Individual breach incidents
-    DnsResult.php              — DNS check results
-    EmailDelivery.php          — Email delivery tracking
-
-resources/js/
-  views/
-    LandingPage.vue            — Email intake form
-    ResultsPage.vue            — Full results + charts + email CTA
-  components/
-    CategoryCard.vue           — Score card widget
-    AuthChip.vue               — SPF/DKIM/DMARC status chip
-    DetailSection.vue          — Expandable detail accordion
-    charts/
-      BreachTimeline.vue       — Bar chart: breaches by year
-      DataComposition.vue      — Doughnut: exposed data types
-      CategoryComparison.vue   — Horizontal bar: all 6 category scores
+apt install -y certbot python3-certbot-nginx
+certbot --nginx -d yourdomain.com
 ```
 
 ---
 
-## Scoring model summary
+## Updating the app
 
-| Category | Weight | Cap triggers |
-|---|---|---|
-| Breach History | 25% | |
-| Data Sensitivity | 20% | Password leak → overall ≤ 49 |
-| SPF Health | 15% | |
-| DKIM Health | 15% | Missing auth → overall ≤ 84 |
-| DMARC Enforcement | 15% | Any breach → overall ≤ 69 |
-| Domain Security Posture | 10% | |
+```bash
+su - cyberapp
+cd /var/www/cyber-score
 
-Grade bands: **90–100** Excellent · **75–89** Good · **55–74** Fair · **35–54** Elevated Risk · **0–34** High Risk
-
----
-
-## Production checklist
-
-- [ ] Set `APP_ENV=production` and `APP_DEBUG=false`
-- [ ] Run `php artisan config:cache && php artisan route:cache && php artisan view:cache`
-- [ ] Run `npm run build`
-- [ ] Configure a queue worker for future async report processing (`php artisan queue:work`)
-- [ ] Set up HTTPS (Let's Encrypt / Forge / Vapor)
-- [ ] Configure a real SMTP provider (Mailgun, Postmark, SES)
-- [ ] Review data retention policy and add a scheduled cleanup command
-- [ ] Restrict `requester_ip` storage per your jurisdiction's privacy laws
+git pull
+composer install --no-dev --optimize-autoloader
+npm ci && npm run build
+php artisan migrate --force
+php artisan config:cache && php artisan route:cache && php artisan view:cache
+```

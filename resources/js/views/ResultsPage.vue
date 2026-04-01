@@ -390,6 +390,7 @@
 <script setup>
 import { ref, computed, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
+import axios from 'axios'
 import { useAssessmentStore } from '../stores/assessment.js'
 import CategoryCard from '../components/CategoryCard.vue'
 import ScoreGauge from '../components/ScoreGauge.vue'
@@ -428,10 +429,22 @@ function sortedAttrs(attrs) {
 
 const result = computed(() => store.result)
 
-onMounted(() => {
-  // If navigated directly (e.g. page refresh), there's no result in store — redirect home
+onMounted(async () => {
   if (!store.result) {
-    router.push({ name: 'landing' })
+    if (props.id) {
+      // Navigated directly or page refreshed — load from API
+      loading.value = true
+      try {
+        const { data } = await axios.get(`/api/assessments/${props.id}`)
+        store.result = data
+      } catch {
+        router.push({ name: 'landing' })
+      } finally {
+        loading.value = false
+      }
+    } else {
+      router.push({ name: 'landing' })
+    }
   }
 })
 

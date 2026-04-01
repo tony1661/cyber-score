@@ -93,14 +93,72 @@ class AssessmentController extends Controller
     {
         $submission->load(['categoryScores', 'breachEvents', 'dnsResult']);
 
+        // Rebuild categories array from persisted scores
+        $categories = [];
+        foreach ($submission->categoryScores as $cat) {
+            $categories[$cat->category_key] = [
+                'name'      => $cat->category_name,
+                'score'     => $cat->score,
+                'rationale' => $cat->rationale,
+                'status'    => $this->scorer->statusForScore($cat->score),
+            ];
+        }
+
+        // Rebuild breach_data from persisted breach events
+        $breaches    = [];
+        $allAttrs    = [];
+        foreach ($submission->breachEvents as $be) {
+            $attrs = $be->exposed_attributes_json;
+            if (is_string($attrs)) { $attrs = json_decode($attrs, true) ?? []; }
+            $breaches[] = [
+                'source_name'        => $be->breach_name,
+                'breach_date'        => $be->breach_date,
+                'record_count'       => 0,
+                'exposed_attributes' => (array) $attrs,
+            ];
+            $allAttrs = array_merge($allAttrs, array_map('strtolower', (array) $attrs));
+        }
+
+        $breachData = [
+            'available'          => true,
+            'found'              => count($breaches) > 0,
+            'breach_count'       => count($breaches),
+            'breaches'           => $breaches,
+            'exposed_attributes' => array_values(array_unique($allAttrs)),
+        ];
+
+        // Rebuild dns_data from persisted DNS result
+        $dnsData = null;
+        if ($submission->dnsResult) {
+            $dr = $submission->dnsResult;
+            $dnsData = [
+                'spf'   => ['found' => $dr->spf_result  !== 'missing', 'quality'  => $dr->spf_result,  'raw' => $dr->spf_raw,  'error' => null],
+                'dkim'  => ['found' => $dr->dkim_result !== 'missing', 'quality'  => $dr->dkim_result, 'raw' => $dr->dkim_raw, 'selector' => null, 'error' => null],
+                'dmarc' => ['found' => $dr->dmarc_result !== 'missing', 'policy'  => $dr->dmarc_result, 'raw' => $dr->dmarc_raw, 'error' => null],
+            ];
+        }
+
+        // Reconstruct grade and summary from overall score
+        $grade = match(true) {
+            $submission->overall_score >= 90 => 'Excellent',
+            $submission->overall_score >= 75 => 'Good',
+            $submission->overall_score >= 55 => 'Fair',
+            $submission->overall_score >= 35 => 'Elevated Risk',
+            default                          => 'High Risk',
+        };
+
         return response()->json([
-            'id'            => $submission->id,
-            'email'         => $submission->email,
-            'domain'        => $submission->domain,
-            'overall_score' => $submission->overall_score,
-            'grade'         => $this->scorer->calculate([], []  )['grade'] ?? 'N/A',
-            'status'        => $submission->status,
-            'created_at'    => $submission->created_at,
+            'id'                 => $submission->id,
+            'email'              => $submission->email,
+            'domain'             => $submission->domain,
+            'overall_score'      => $submission->overall_score,
+            'grade'              => $grade,
+            'summary'            => $submission->summary,
+            'categories'         => $categories,
+            'breach_data'        => $breachData,
+            'domain_breach_data' => $submission->domain_breach_json,
+            'dns_data'           => $dnsData,
+            'status'             => $submission->status,
         ]);
     }
 

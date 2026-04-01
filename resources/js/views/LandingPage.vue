@@ -2,34 +2,32 @@
   <div class="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-blue-950 flex flex-col">
 
     <!-- Header -->
-    <header class="px-6 py-5 flex items-center justify-between max-w-6xl mx-auto w-full">
-      <div class="flex items-center">
-        <img :src="logoUrl" alt="MeteorTel" class="h-8 w-auto" />
-      </div>
+    <header class="px-6 py-4 flex items-center justify-center max-w-6xl mx-auto w-full">
+      <img :src="logoUrl" alt="MeteorTel" class="h-14 w-auto" />
     </header>
 
     <!-- Hero -->
-    <main class="flex-1 flex items-center justify-center px-4 py-16">
+    <main class="flex-1 flex items-center justify-center px-4 py-6">
       <div class="max-w-2xl w-full text-center">
 
-        <div class="inline-flex items-center gap-2 bg-blue-500/10 border border-blue-500/20 rounded-full px-4 py-1.5 text-blue-300 text-sm mb-8">
+        <div class="inline-flex items-center gap-2 bg-blue-500/10 border border-blue-500/20 rounded-full px-4 py-1.5 text-blue-300 text-sm mb-5">
           <span class="w-2 h-2 rounded-full bg-blue-400 animate-pulse"></span>
           Free Instant Assessment
         </div>
 
-        <h1 class="text-4xl md:text-5xl font-extrabold text-white leading-tight mb-4">
+        <h1 class="text-5xl md:text-6xl lg:text-7xl font-extrabold text-white leading-tight mb-4">
           Is Your Business<br />
           <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-400">Exposed?</span>
         </h1>
 
-        <p class="text-slate-400 text-lg mb-10 max-w-xl mx-auto">
+        <p class="text-slate-400 text-base mb-6 max-w-xl mx-auto">
           Enter your email address to instantly check breach exposure history
           and evaluate your domain's SPF, DKIM, and DMARC security configuration.
         </p>
 
         <!-- Assessment form -->
-        <form @submit.prevent="handleSubmit" class="bg-slate-900/60 border border-slate-700/50 rounded-2xl p-8 backdrop-blur-sm text-left shadow-2xl">
-          <div class="mb-5">
+        <form @submit.prevent="handleSubmit" class="bg-slate-900/60 border border-slate-700/50 rounded-2xl p-6 backdrop-blur-sm text-left shadow-2xl">
+          <div class="mb-4">
             <label class="block text-sm font-semibold text-slate-300 mb-2" for="email">
               Email Address
             </label>
@@ -45,7 +43,7 @@
           </div>
 
           <!-- Consent -->
-          <label class="flex items-start gap-3 cursor-pointer mb-6">
+          <label class="flex items-start gap-3 cursor-pointer mb-5">
             <div class="relative flex-shrink-0 mt-0.5">
               <input v-model="consent" type="checkbox" class="sr-only peer" required />
               <div class="w-5 h-5 rounded border-2 border-slate-600 peer-checked:bg-blue-500 peer-checked:border-blue-500 transition flex items-center justify-center">
@@ -60,7 +58,7 @@
             </span>
           </label>
 
-          <div v-if="store.error" class="mb-5 bg-red-500/10 border border-red-500/30 rounded-xl px-4 py-3 text-red-400 text-sm">
+          <div v-if="store.error" class="mb-4 bg-red-500/10 border border-red-500/30 rounded-xl px-4 py-3 text-red-400 text-sm">
             {{ store.error }}
           </div>
 
@@ -81,7 +79,7 @@
         </form>
 
         <!-- Trust indicators -->
-        <div class="mt-8 flex items-center justify-center gap-6 text-slate-500 text-sm flex-wrap">
+        <div class="mt-5 flex items-center justify-center gap-6 text-slate-500 text-sm flex-wrap">
           <span class="flex items-center gap-1.5">
             <svg class="w-4 h-4 text-green-500" viewBox="0 0 20 20" fill="currentColor">
               <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
@@ -106,7 +104,7 @@
     </main>
 
     <!-- Footer -->
-    <footer class="py-6 text-center text-slate-600 text-sm">
+    <footer class="py-4 text-center text-slate-600 text-sm">
       © {{ new Date().getFullYear() }} MeteorTel Security. All rights reserved.
     </footer>
 

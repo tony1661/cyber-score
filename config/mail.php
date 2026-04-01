@@ -25,6 +25,6 @@ return [
         'name'    => env('MAIL_FROM_NAME', 'Email Exposure Assessment'),
     ],
 
-    'sales_rep_email' => env('SALES_REP_EMAIL', 'tony@meteortel.com'),
+    'sales_rep_email' => env('SALES_REP_EMAIL', ''),
 
 ];

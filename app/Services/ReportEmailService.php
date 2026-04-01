@@ -11,7 +11,7 @@ class ReportEmailService
 {
     public function send(Submission $submission): array
     {
-        $salesRepEmail = config('mail.sales_rep_email', env('SALES_REP_EMAIL', 'tony@meteortel.com'));
+        $salesRepEmail = config('mail.sales_rep_email', env('SALES_REP_EMAIL', ''));
 
         try {
             $submission->loadMissing(['breachEvents', 'categoryScores', 'dnsResult']);

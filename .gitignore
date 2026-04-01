@@ -20,6 +20,9 @@ Thumbs.db
 node_modules/
 jspm_packages/
 
+# Vite dev server indicator (must never be deployed)
+public/hot
+
 # Build/Log directories
 dist/
 build/

@@ -1,0 +1,35 @@
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# IDE/Editor settings
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Node.js/Dependency folders
+node_modules/
+jspm_packages/
+
+# Build/Log directories
+dist/
+build/
+bin/
+obj/
+*.log
+*.tmp
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+.env

@@ -1,0 +1,1054 @@
+<!DOCTYPE html>
+<!-- saved from url=(0052)https://console.xposedornot.com/docs/threatintel/api -->
+<html lang="en" data-darkreader-mode="dynamic" data-darkreader-scheme="dark" data-darkreader-proxy-injected="true" style="--vsc-domain: &quot;console.xposedornot.com&quot;;"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><style class="darkreader darkreader--fallback" media="screen"></style><style class="darkreader darkreader--user-agent" media="screen">@layer {
+html {
+    background-color: var(--darkreader-background-ffffff, #181a1b) !important;
+}
+html {
+    color-scheme: dark !important;
+}
+iframe {
+    color-scheme: dark !important;
+}
+html, body {
+    background-color: var(--darkreader-background-ffffff, #181a1b);
+}
+html, body {
+    border-color: var(--darkreader-border-4c4c4c, #736b5e);
+    color: var(--darkreader-text-000000, #e8e6e3);
+}
+a {
+    color: var(--darkreader-text-0040ff, #3391ff);
+}
+table {
+    border-color: var(--darkreader-border-808080, #545b5e);
+}
+mark {
+    color: var(--darkreader-text-000000, #e8e6e3);
+}
+::placeholder {
+    color: var(--darkreader-text-a9a9a9, #b2aba1);
+}
+input:-webkit-autofill,
+textarea:-webkit-autofill,
+select:-webkit-autofill {
+    background-color: var(--darkreader-background-faffbd, #404400) !important;
+    color: var(--darkreader-text-000000, #e8e6e3) !important;
+}
+::selection {
+    background-color: var(--darkreader-background-0060d4, #004daa) !important;
+    color: var(--darkreader-text-ffffff, #e8e6e3) !important;
+}
+::-moz-selection {
+    background-color: var(--darkreader-background-0060d4, #004daa) !important;
+    color: var(--darkreader-text-ffffff, #e8e6e3) !important;
+}
+}</style><style class="darkreader darkreader--text" media="screen"></style><style class="darkreader darkreader--invert" media="screen">.jfk-bubble.gtx-bubble, .captcheck_answer_label > input + img, span#closed_text > img[src^="https://www.gstatic.com/images/branding/googlelogo"], span[data-href^="https://www.hcaptcha.com/"] > #icon, img.Wirisformula, a[data-testid="headerMediumLogo"]>svg, .d2l-navigation-link-image-container, .d2l-iframe-loading-container {
+    filter: invert(100%) hue-rotate(180deg) contrast(90%) !important;
+}</style><style class="darkreader darkreader--inline" media="screen">[data-darkreader-inline-bgcolor] {
+  background-color: var(--darkreader-inline-bgcolor) !important;
+}
+[data-darkreader-inline-bgimage] {
+  background-image: var(--darkreader-inline-bgimage) !important;
+}
+[data-darkreader-inline-border] {
+  border-color: var(--darkreader-inline-border) !important;
+}
+[data-darkreader-inline-border-bottom] {
+  border-bottom-color: var(--darkreader-inline-border-bottom) !important;
+}
+[data-darkreader-inline-border-left] {
+  border-left-color: var(--darkreader-inline-border-left) !important;
+}
+[data-darkreader-inline-border-right] {
+  border-right-color: var(--darkreader-inline-border-right) !important;
+}
+[data-darkreader-inline-border-top] {
+  border-top-color: var(--darkreader-inline-border-top) !important;
+}
+[data-darkreader-inline-boxshadow] {
+  box-shadow: var(--darkreader-inline-boxshadow) !important;
+}
+[data-darkreader-inline-color] {
+  color: var(--darkreader-inline-color) !important;
+}
+[data-darkreader-inline-fill] {
+  fill: var(--darkreader-inline-fill) !important;
+}
+[data-darkreader-inline-stroke] {
+  stroke: var(--darkreader-inline-stroke) !important;
+}
+[data-darkreader-inline-outline] {
+  outline-color: var(--darkreader-inline-outline) !important;
+}
+[data-darkreader-inline-stopcolor] {
+  stop-color: var(--darkreader-inline-stopcolor) !important;
+}
+[data-darkreader-inline-bg] {
+  background: var(--darkreader-inline-bg) !important;
+}
+[data-darkreader-inline-border-short] {
+  border: var(--darkreader-inline-border-short) !important;
+}
+[data-darkreader-inline-border-bottom-short] {
+  border-bottom: var(--darkreader-inline-border-bottom-short) !important;
+}
+[data-darkreader-inline-border-left-short] {
+  border-left: var(--darkreader-inline-border-left-short) !important;
+}
+[data-darkreader-inline-border-right-short] {
+  border-right: var(--darkreader-inline-border-right-short) !important;
+}
+[data-darkreader-inline-border-top-short] {
+  border-top: var(--darkreader-inline-border-top-short) !important;
+}
+[data-darkreader-inline-invert] {
+    filter: invert(100%) hue-rotate(180deg);
+}</style><style class="darkreader darkreader--variables" media="screen">:root {
+   --darkreader-neutral-background: var(--darkreader-background-ffffff, #181a1b);
+   --darkreader-neutral-text: var(--darkreader-text-000000, #e8e6e3);
+   --darkreader-selection-background: var(--darkreader-background-0060d4, #004daa);
+   --darkreader-selection-text: var(--darkreader-text-ffffff, #e8e6e3);
+}</style><style class="darkreader darkreader--root-vars" media="screen"></style>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ThreatIntel+ API Guide - xonPlus</title>
+    <link rel="stylesheet" href="./ThreatIntel+ API Guide - xonPlus_files/style.css"><style class="darkreader darkreader--sync" media="screen"></style>
+    <link rel="stylesheet" href="./ThreatIntel+ API Guide - xonPlus_files/all.min.css"><style class="darkreader darkreader--sync" media="screen"></style>
+    <link href="./ThreatIntel+ API Guide - xonPlus_files/css2" rel="stylesheet">
+<meta name="darkreader" content="d6f5b06dbb6f47c4930e332f19452723"><style class="darkreader darkreader--override" media="screen">.vimvixen-hint {
+    background-color: var(--darkreader-background-ffd76e, #684b00) !important;
+    border-color: var(--darkreader-background-c59d00, #9e7e00) !important;
+    color: var(--darkreader-text-302505, #d7d4cf) !important;
+}
+#vimvixen-console-frame {
+    color-scheme: light !important;
+}
+::placeholder {
+    opacity: 0.5 !important;
+}
+#edge-translate-panel-body,
+.MuiTypography-body1,
+.nfe-quote-text {
+    color: var(--darkreader-neutral-text) !important;
+}
+gr-main-header {
+    background-color: var(--darkreader-background-add8e6, #1b4958) !important;
+}
+.tou-z65h9k,
+.tou-mignzq,
+.tou-1b6i2ox,
+.tou-lnqlqk {
+    background-color: var(--darkreader-neutral-background) !important;
+}
+.tou-75mvi {
+    background-color: var(--darkreader-background-cfecf5, #0f3a47) !important;
+}
+.tou-ta9e87,
+.tou-1w3fhi0,
+.tou-1b8t2us,
+.tou-py7lfi,
+.tou-1lpmd9d,
+.tou-1frrtv8,
+.tou-17ezmgn {
+    background-color: var(--darkreader-background-f5f5f5, #1e2021) !important;
+}
+.tou-uknfeu {
+    background-color: var(--darkreader-background-faedda, #432c09) !important;
+}
+.tou-6i3zyv {
+    background-color: var(--darkreader-background-85c3d8, #245d70) !important;
+}
+div.mermaid-viewer-control-panel .btn {
+    background-color: var(--darkreader-neutral-background);
+    fill: var(--darkreader-neutral-text);
+}
+svg g rect.er {
+    fill: var(--darkreader-neutral-background) !important;
+}
+svg g rect.er.entityBox {
+    fill: var(--darkreader-neutral-background) !important;
+}
+svg g rect.er.attributeBoxOdd {
+    fill: var(--darkreader-neutral-background) !important;
+}
+svg g rect.er.attributeBoxEven {
+    fill: var(--darkreader-selection-background);
+    fill-opacity: 0.8 !important;
+}
+svg rect.er.relationshipLabelBox {
+    fill: var(--darkreader-neutral-background) !important;
+}
+svg g g.nodes rect,
+svg g g.nodes polygon {
+    fill: var(--darkreader-neutral-background) !important;
+}
+svg g rect.task {
+    fill: var(--darkreader-selection-background) !important;
+}
+svg line.messageLine0,
+svg line.messageLine1 {
+    stroke: var(--darkreader-neutral-text) !important;
+}
+div.mermaid .actor {
+    fill: var(--darkreader-neutral-background) !important;
+}
+mitid-authenticators-code-app > .code-app-container {
+    background-color: white !important;
+    padding-top: 1rem;
+}
+iframe#unpaywall[src$="unpaywall.html"] {
+    color-scheme: light !important;
+}
+select {
+    --darkreader-bg--form-control-background-color: rgba(22, 22, 22, 0) !important;
+}
+body#tumblr {
+    --darkreader-bg--secondary-accent: 31, 32, 34 !important;
+    --darkreader-bg--white: 23, 23, 23 !important;
+    --darkreader-text--black: 228, 224, 218 !important;
+}
+:host {
+    --d2l-border-color: var(--darkreader-bg--d2l-color-gypsum) !important;
+    --d2l-button-icon-background-color-hover: var(--darkreader-bg--d2l-color-gypsum) !important;
+    --d2l-color-ferrite: var(--darkreader-neutral-text) !important;
+    --d2l-color-sylvite: var(--darkreader-bg--d2l-color-sylvite) !important;
+    --d2l-dropdown-background-color: var(--darkreader-neutral-background) !important;
+    --d2l-dropdown-border-color: var(--darkreader-border--d2l-color-mica) !important;
+    --d2l-input-backgroud-color: var(--darkreader-neutral-background) !important;
+    --d2l-menu-border-color: var(--darkreader-bg--d2l-color-gypsum) !important;
+    --d2l-tooltip-background-color: var(--darkreader-neutral-background) !important;
+    --d2l-tooltip-border-color: var(--darkreader-bg--d2l-color-gypsum) !important;
+}
+:host([_floating]) .d2l-floating-buttons-container {
+    background-color: var(--darkreader-neutral-background) !important;
+    border-top-color: var(--darkreader-border--d2l-color-mica) !important;
+    opacity: 0.88 !important;
+}
+d2l-card {
+    background: var(--darkreader-neutral-background) !important;
+    border-color: var(--darkreader-border--d2l-color-gypsum) !important;
+}
+d2l-dropdown-content > div,
+d2l-menu-item {
+    background-color: var(--darkreader-neutral-background) !important;
+    border-radius: 10px !important;
+}
+d2l-empty-state-simple {
+    border-color: var(--darkreader-bg--d2l-color-gypsum) !important;
+}
+.d2l-button-filter > ul > li > a.vui-button {
+    border-color: var(--darkreader-border--d2l-color-mica) !important;
+}
+.d2l-label-text:has(.d2l-button-subtle-content):hover,
+.d2l-label-text:has(.d2l-button-subtle-content):focus,
+.d2l-label-text:has(.d2l-button-subtle-content):active {
+    background-color: var(--darkreader-bg--d2l-color-gypsum) !important;
+}
+.d2l-navigation-centerer {
+    color: inherit !important;
+}
+.d2l-tabs-layout {
+    border-color: var(--darkreader-border--d2l-color-gypsum) !important;
+}
+.d2l-input,
+.d2l-calendar-date,
+.d2l-htmleditor-container {
+    background-color: var(--darkreader-neutral-background) !important;
+}
+.d2l-collapsible-panel {
+    border: 1px solid var(--darkreader-border--d2l-color-mica) !important;
+    border-radius: 0.4rem !important;
+}
+.d2l-collapsible-panel-divider {
+    border-bottom: 1px solid var(--darkreader-border--d2l-color-mica) !important;
+}
+.d2l-w2d-flex {
+    border-bottom: 2px solid var(--darkreader-border--d2l-color-mica) !important;
+}
+.d2l-collapsible-panel scrolled,
+.d2l-collapsible-panel-header,
+.d2l-w2d-collection-fixed {
+    background-color: var(--darkreader-neutral-background) !important;
+}
+.d2l-loading-spinner-bg {
+    fill: var(--darkreader-bg--d2l-color-gypsum) !important;
+}
+.d2l-loading-spinner-bg-stroke {
+    stroke: var(--darkreader-border--d2l-color-mica) !important;
+}
+.d2l-loading-spinner-wrapper svg path,
+.d2l-loading-spinner-wrapper svg circle {
+    fill: var(--darkreader-neutral-background) !important;
+}
+.d2l-twopanelselector-side.d2l-twopanelselector-side-sep {
+    background: var(--darkreader-bg--d2l-color-mica) !important;
+}
+.d2l-le-TreeAccordionItem-anchor::before {
+    background: var(--darkreader-bg--d2l-color-corundum) !important;
+}</style></head>
+
+<body>
+    <div class="doc-container">
+        <!-- Sidebar Navigation -->
+        <nav class="sidebar">
+            <div class="sidebar-header">
+                <img src="./ThreatIntel+ API Guide - xonPlus_files/logo.png" alt="xonPlus Logo" class="logo">
+                <div class="search-container">
+                    <input type="text" id="search" placeholder="Search documentation...">
+                    <i class="fas fa-search"></i>
+                </div>
+            </div>
+
+            <div class="sidebar-content">
+                <div class="nav-section">
+                    <h3>ThreatIntel+ Module</h3>
+                    <ul>
+                        <li><a href="https://console.xposedornot.com/docs/threatintel/index.html">Overview</a></li>
+                        <li><a href="https://console.xposedornot.com/docs/threatintel/dashboard.html">Partner Dashboard</a></li>
+                        <li><a href="https://console.xposedornot.com/docs/threatintel/domains.html">Domains</a></li>
+                        <li class="active"><a href="https://console.xposedornot.com/docs/threatintel/api.html">Partner API</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <div class="content-header"><button class="sidebar-toggle"><i class="fas fa-bars"></i></button>
+                <div class="breadcrumb">
+                    <a href="https://console.xposedornot.com/docs/index.html">Home</a> / <a href="https://console.xposedornot.com/docs/threatintel/index.html">ThreatIntel+</a> / <span>Partner API</span>
+                </div>
+            </div>
+
+            <article class="doc-content">
+                <h1>Partner API</h1>
+
+                <div class="doc-section" id="overview">
+                    <h2>Overview</h2>
+                    <p>The ThreatIntel+ Partner API provides programmatic access to all threat intelligence capabilities
+                        for partners, MSSPs, and service providers. This comprehensive RESTful API enables you to
+                        integrate threat intelligence data into your existing security tools, automate client
+                        onboarding workflows, and build custom dashboards tailored to your operational needs.</p>
+
+                    <p>The Partner API is designed for high-volume operations with support for bulk queries, batch
+                        processing, and efficient data retrieval across multiple client accounts. Whether you're
+                        integrating with a SIEM platform, building custom reporting tools, or automating security
+                        workflows, the Partner API provides the flexibility and power you need.</p>
+                </div>
+
+                <!-- Table of Contents -->
+                <div class="doc-section" id="toc">
+                    <h2>API Reference - Table of Contents</h2>
+                    <div class="feature-card">
+                        <h3><i class="fas fa-list"></i> Quick Navigation</h3>
+                        <div class="toc-container" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem;">
+                            <div class="toc-group">
+                                <h4 style="color: rgb(109, 170, 224); margin-bottom: 0.5rem; --darkreader-inline-color: var(--darkreader-text-6daae0, #6fafe0);" data-darkreader-inline-color=""><i class="fas fa-globe"></i> Domain Management</h4>
+                                <ul style="list-style: none; padding-left: 0;">
+                                    <li style="margin: 0.5rem 0;"><a href="https://console.xposedornot.com/docs/threatintel/api#single-domain-upload" style="color: rgb(159, 192, 224); --darkreader-inline-color: var(--darkreader-text-9fc0e0, #95bddd);" data-darkreader-inline-color=""><i class="fas fa-plus-circle"></i> Single Domain Upload</a></li>
+                                    <li style="margin: 0.5rem 0;"><a href="https://console.xposedornot.com/docs/threatintel/api#bulk-domain-upload" style="color: rgb(159, 192, 224); --darkreader-inline-color: var(--darkreader-text-9fc0e0, #95bddd);" data-darkreader-inline-color=""><i class="fas fa-upload"></i> Bulk Domain Upload</a></li>
+                                    <li style="margin: 0.5rem 0;"><a href="https://console.xposedornot.com/docs/threatintel/api#list-all-domains" style="color: rgb(159, 192, 224); --darkreader-inline-color: var(--darkreader-text-9fc0e0, #95bddd);" data-darkreader-inline-color=""><i class="fas fa-list-alt"></i> List All Domains</a></li>
+                                    <li style="margin: 0.5rem 0;"><a href="https://console.xposedornot.com/docs/threatintel/api#get-domain-status" style="color: rgb(159, 192, 224); --darkreader-inline-color: var(--darkreader-text-9fc0e0, #95bddd);" data-darkreader-inline-color=""><i class="fas fa-search"></i> Get Domain Status</a></li>
+                                </ul>
+                            </div>
+                            <div class="toc-group">
+                                <h4 style="color: rgb(109, 170, 224); margin-bottom: 0.5rem; --darkreader-inline-color: var(--darkreader-text-6daae0, #6fafe0);" data-darkreader-inline-color=""><i class="fas fa-shield-alt"></i> Threat Intelligence</h4>
+                                <ul style="list-style: none; padding-left: 0;">
+                                    <li style="margin: 0.5rem 0;"><a href="https://console.xposedornot.com/docs/threatintel/api#email-breach-check" style="color: rgb(159, 192, 224); --darkreader-inline-color: var(--darkreader-text-9fc0e0, #95bddd);" data-darkreader-inline-color=""><i class="fas fa-envelope"></i> Email Breach Check</a></li>
+                                    <li style="margin: 0.5rem 0;"><a href="https://console.xposedornot.com/docs/threatintel/api#domain-breach-summary" style="color: rgb(159, 192, 224); --darkreader-inline-color: var(--darkreader-text-9fc0e0, #95bddd);" data-darkreader-inline-color=""><i class="fas fa-chart-bar"></i> Domain Breach Summary</a></li>
+                                </ul>
+                            </div>
+                            <div class="toc-group">
+                                <h4 style="color: rgb(109, 170, 224); margin-bottom: 0.5rem; --darkreader-inline-color: var(--darkreader-text-6daae0, #6fafe0);" data-darkreader-inline-color=""><i class="fas fa-cog"></i> Reference</h4>
+                                <ul style="list-style: none; padding-left: 0;">
+                                    <li style="margin: 0.5rem 0;"><a href="https://console.xposedornot.com/docs/threatintel/api#authentication" style="color: rgb(159, 192, 224); --darkreader-inline-color: var(--darkreader-text-9fc0e0, #95bddd);" data-darkreader-inline-color=""><i class="fas fa-lock"></i> Authentication</a></li>
+                                    <li style="margin: 0.5rem 0;"><a href="https://console.xposedornot.com/docs/threatintel/api#error-handling" style="color: rgb(159, 192, 224); --darkreader-inline-color: var(--darkreader-text-9fc0e0, #95bddd);" data-darkreader-inline-color=""><i class="fas fa-exclamation-circle"></i> Error Handling</a></li>
+                                    <li style="margin: 0.5rem 0;"><a href="https://console.xposedornot.com/docs/threatintel/api#rate-limits" style="color: rgb(159, 192, 224); --darkreader-inline-color: var(--darkreader-text-9fc0e0, #95bddd);" data-darkreader-inline-color=""><i class="fas fa-tachometer-alt"></i> Rate Limits &amp; Quotas</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="doc-section">
+                    <h2>API Key Management</h2>
+                    <p>The Partner API interface provides comprehensive tools for creating, monitoring, and managing
+                        your API keys. Proper API key management is critical for secure access to threat intelligence
+                        data and maintaining operational security.</p>
+
+                    <div class="feature-card">
+                        <h3><i class="fas fa-key"></i> Key Generation</h3>
+                        <div class="metrics-grid">
+                            <div class="metric-item">
+                                <h4><i class="fas fa-plus-circle"></i> Create New API Key</h4>
+                                <p>Generate new API keys with a single click. Each key is uniquely generated and
+                                    displayed with creation timestamp, creator information, and initial active status.
+                                    Keys are immediately ready for use in API requests.</p>
+                            </div>
+                            <div class="metric-item">
+                                <h4><i class="fas fa-info-circle"></i> Key Metadata</h4>
+                                <p>Each API key includes comprehensive metadata for tracking and management:</p>
+                                <ul>
+                                    <li>Unique key identifier for API authentication</li>
+                                    <li>Creation timestamp for audit logging</li>
+                                    <li>Creator information (user who generated the key)</li>
+                                    <li>Current status (Active or Suspended)</li>
+                                    <li>Usage statistics and request counts</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="feature-card">
+                        <h3><i class="fas fa-pause-circle"></i> Key Suspension</h3>
+                        <div class="metrics-grid">
+                            <div class="metric-item">
+                                <h4><i class="fas fa-ban"></i> Suspend Active Keys</h4>
+                                <p>Temporarily disable API keys without deleting them. Suspended keys cannot be used for
+                                    API requests but retain all historical data and can be reactivated at any time. Use
+                                    this feature for temporary access control or when investigating potential security
+                                    issues.</p>
+                            </div>
+                            <div class="metric-item">
+                                <h4><i class="fas fa-exclamation-triangle"></i> Suspension Status</h4>
+                                <p>Suspended keys are clearly marked with a red "Suspended" badge and X icon in the
+                                    management table. Any API requests using suspended keys will be rejected with an
+                                    appropriate error message.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="feature-card">
+                        <h3><i class="fas fa-check-circle"></i> Key Activation</h3>
+                        <div class="metrics-grid">
+                            <div class="metric-item">
+                                <h4><i class="fas fa-play"></i> Reactivate Keys</h4>
+                                <p>Restore functionality to suspended API keys with the activate button. Reactivated
+                                    keys immediately regain full API access capabilities and can be used for requests.
+                                    All historical usage data is preserved during suspension and reactivation.</p>
+                            </div>
+                            <div class="metric-item">
+                                <h4><i class="fas fa-shield-alt"></i> Active Status</h4>
+                                <p>Active keys display a green "Active" badge with checkmark icon, indicating they are
+                                    ready for use in API requests. Monitor active keys regularly for unusual usage
+                                    patterns or unauthorized access.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="doc-section">
+                    <h2>API Usage Monitoring</h2>
+                    <p>Track and analyze your Partner API usage with comprehensive monitoring tools and metrics. The API
+                        interface provides real-time visibility into request volumes, quota usage, and historical trends
+                        across all your API keys.</p>
+
+                    <div class="feature-card">
+                        <h3><i class="fas fa-chart-line"></i> Usage Metrics</h3>
+                        <div class="metrics-grid">
+                            <div class="metric-item">
+                                <h4><i class="fas fa-tachometer-alt"></i> Current Usage</h4>
+                                <p>Real-time display of API request consumption showing current usage versus total
+                                    allocated quota. Visual progress bar with color coding indicates usage levels: green
+                                    (normal), yellow (moderate), red (approaching limit).</p>
+                            </div>
+                            <div class="metric-item">
+                                <h4><i class="fas fa-calendar-alt"></i> Historical Trends</h4>
+                                <p>Interactive charts showing API usage patterns over the last 30 days. Identify peak
+                                    usage periods, track growth trends, and optimize your API consumption strategy based
+                                    on historical data.</p>
+                            </div>
+                            <div class="metric-item">
+                                <h4><i class="fas fa-list"></i> Per-Key Statistics</h4>
+                                <p>Detailed usage statistics for each API key, helping identify which keys are most
+                                    active and detect any unusual patterns or potential security issues.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="doc-section" id="domain-management">
+                    <h2>Domain Management Endpoints</h2>
+                    <p>The Domain Management endpoints allow you to programmatically onboard and manage domains for threat
+                        intelligence monitoring. You can add domains individually or in bulk, and track their validation
+                        status through the API. All endpoints require authentication via the <code>X-API-Key</code> header.</p>
+
+                    <!-- Single Domain Upload -->
+                    <div class="feature-card" id="single-domain-upload">
+                        <h3><i class="fas fa-plus-circle"></i> Single Domain Upload</h3>
+                        <p>Submit a single domain for onboarding and validation. This endpoint is ideal for adding individual
+                            domains on-demand or integrating domain onboarding into automated workflows. The domain will be
+                            queued for validation and processing.</p>
+                        <div class="code-example">
+                            <p><strong>Endpoint:</strong></p>
+                            <pre style="position: relative;"><code>POST /v2/partner/domains</code><button class="copy-button" type="button" aria-label="Copy code to clipboard"><i class="fas fa-copy"></i></button></pre>
+                            <p><strong>Headers:</strong></p>
+                            <pre style="position: relative;"><code>X-API-Key: YOUR_API_KEY
+Content-Type: application/json</code><button class="copy-button" type="button" aria-label="Copy code to clipboard"><i class="fas fa-copy"></i></button></pre>
+                            <p><strong>Request Body:</strong></p>
+                            <pre style="position: relative;"><code>{
+  "domain": "example.com"
+}</code><button class="copy-button" type="button" aria-label="Copy code to clipboard"><i class="fas fa-copy"></i></button></pre>
+                            <p><strong>Request Example:</strong></p>
+                            <pre style="position: relative;"><code>curl -X POST "https://plus-api.xposedornot.com/v2/partner/domains" \
+  -H "X-API-Key: abc123...xyz789" \
+  -H "Content-Type: application/json" \
+  -d '{"domain": "example.com"}'</code><button class="copy-button" type="button" aria-label="Copy code to clipboard"><i class="fas fa-copy"></i></button></pre>
+                            <p><strong>Success Response (202 Accepted):</strong></p>
+                            <pre style="position: relative;"><code>{
+  "message": "Domain accepted for validation",
+  "domain": "example.com",
+  "status": "pending_validation"
+}</code><button class="copy-button" type="button" aria-label="Copy code to clipboard"><i class="fas fa-copy"></i></button></pre>
+                        </div>
+                    </div>
+
+                    <!-- Bulk Domain Upload -->
+                    <div class="feature-card" id="bulk-domain-upload">
+                        <h3><i class="fas fa-upload"></i> Bulk Domain Upload</h3>
+                        <p>Upload multiple domains at once using a file. This endpoint accepts CSV or TXT files containing
+                            one domain per line. Ideal for initial onboarding of multiple client domains or batch operations.
+                            The API validates each domain and provides detailed feedback on accepted, rejected, and duplicate entries.</p>
+                        <div class="code-example">
+                            <p><strong>Endpoint:</strong></p>
+                            <pre style="position: relative;"><code>POST /v2/partner/upload-domains</code><button class="copy-button" type="button" aria-label="Copy code to clipboard"><i class="fas fa-copy"></i></button></pre>
+                            <p><strong>Headers:</strong></p>
+                            <pre style="position: relative;"><code>X-API-Key: YOUR_API_KEY
+Content-Type: multipart/form-data</code><button class="copy-button" type="button" aria-label="Copy code to clipboard"><i class="fas fa-copy"></i></button></pre>
+                            <p><strong>Request Example:</strong></p>
+                            <pre style="position: relative;"><code>curl -X POST "https://plus-api.xposedornot.com/v2/partner/upload-domains" \
+  -H "X-API-Key: abc123...xyz789" \
+  -F "file=@/path/to/domains.txt"</code><button class="copy-button" type="button" aria-label="Copy code to clipboard"><i class="fas fa-copy"></i></button></pre>
+                            <p><strong>Success Response (202 Accepted):</strong></p>
+                            <pre style="position: relative;"><code>{
+  "message": "Domains accepted for validation. 1 domains queued for processing.",
+  "summary": {
+    "total_submitted": 1,
+    "plan_limit": 50,
+    "current_quota_used": 1,
+    "available_slots": 49,
+    "accepted": 1,
+    "rejected_invalid": 0,
+    "rejected_denied": 0,
+    "rejected_duplicate": 0,
+    "rejected_quota": 0
+  },
+  "rejected_details": {},
+  "duplicate_domains": [],
+  "quota_rejected_domains": []
+}</code><button class="copy-button" type="button" aria-label="Copy code to clipboard"><i class="fas fa-copy"></i></button></pre>
+                            <p><strong>Response Fields:</strong></p>
+                            <ul>
+                                <li><strong>total_submitted:</strong> Number of domains in the uploaded file</li>
+                                <li><strong>accepted:</strong> Number of domains successfully queued for validation</li>
+                                <li><strong>rejected_invalid:</strong> Domains with invalid format</li>
+                                <li><strong>rejected_duplicate:</strong> Domains already in your account</li>
+                                <li><strong>rejected_quota:</strong> Domains rejected due to quota limits</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- List All Domains -->
+                    <div class="feature-card" id="list-all-domains">
+                        <h3><i class="fas fa-list-alt"></i> List All Domains</h3>
+                        <p>Retrieve a complete list of all domains associated with your partner account, including their
+                            current validation status, processing state, and metadata. Use this endpoint to monitor the
+                            status of onboarded domains and track your quota usage. Supports filtering and pagination.</p>
+                        <div class="code-example">
+                            <p><strong>Endpoint:</strong></p>
+                            <pre style="position: relative;"><code>GET /v2/partner/domains</code><button class="copy-button" type="button" aria-label="Copy code to clipboard"><i class="fas fa-copy"></i></button></pre>
+                            <p><strong>Headers:</strong></p>
+                            <pre style="position: relative;"><code>X-API-Key: YOUR_API_KEY</code><button class="copy-button" type="button" aria-label="Copy code to clipboard"><i class="fas fa-copy"></i></button></pre>
+                            <p><strong>Query Parameters:</strong></p>
+                            <ul>
+                                <li><strong>domain</strong> (optional): Filter by domain name. Supports exact match or wildcard matching with <code>*</code> (e.g., <code>*example*</code>, <code>example*</code>, <code>*.com</code>)</li>
+                                <li><strong>domain_status</strong> (optional): Filter by validation status: <code>pending_validation</code>, <code>approved</code>, <code>rejected</code>, <code>pending_approval</code></li>
+                                <li><strong>processing_status</strong> (optional): Filter by processing status: <code>pending</code>, <code>processing</code>, <code>completed</code>, <code>failed</code></li>
+                                <li><strong>limit</strong> (optional, integer): Number of results to return. Range: 1-500. Default: <code>100</code></li>
+                                <li><strong>offset</strong> (optional, integer): Number of results to skip for pagination. Default: <code>0</code></li>
+                            </ul>
+                            <p><strong>Request Example:</strong></p>
+                            <pre style="position: relative;"><code>curl -X GET "https://plus-api.xposedornot.com/v2/partner/domains" \
+  -H "X-API-Key: abc123...xyz789"</code><button class="copy-button" type="button" aria-label="Copy code to clipboard"><i class="fas fa-copy"></i></button></pre>
+                            <p><strong>Request Example (with filters):</strong></p>
+                            <pre style="position: relative;"><code>curl -X GET "https://plus-api.xposedornot.com/v2/partner/domains?domain_status=approved&amp;limit=10&amp;offset=0" \
+  -H "X-API-Key: abc123...xyz789"</code><button class="copy-button" type="button" aria-label="Copy code to clipboard"><i class="fas fa-copy"></i></button></pre>
+                            <p><strong>Success Response (200 OK):</strong></p>
+                            <pre style="position: relative;"><code>{
+  "plan": {
+    "tier": "Ultimate",
+    "domain_limit": 50,
+    "current_quota_used": 2,
+    "available_slots": 48
+  },
+  "total_count": 2,
+  "domains": [
+    {
+      "entry_id": "5111641913950208",
+      "domain": "example.com",
+      "status": "approved",
+      "processing_status": "completed",
+      "submitted_at": "2025-12-07T12:05:56.522893+00:00",
+      "verified_at": "2025-12-07T12:05:56.707645+00:00",
+      "rejection_reason": null,
+      "source": "csv",
+      "record_count": 1
+    },
+    {
+      "entry_id": "5640572144451584",
+      "domain": "example.org",
+      "status": "approved",
+      "processing_status": "completed",
+      "submitted_at": "2025-12-13T09:26:08.690515+00:00",
+      "verified_at": "2025-12-13T09:26:08.881731+00:00",
+      "rejection_reason": null,
+      "source": "api_bulk",
+      "record_count": 727
+    }
+  ]
+}</code><button class="copy-button" type="button" aria-label="Copy code to clipboard"><i class="fas fa-copy"></i></button></pre>
+                            <p><strong>Domain Status Values:</strong></p>
+                            <ul>
+                                <li><strong>pending_validation:</strong> Domain is queued for validation</li>
+                                <li><strong>pending_approval:</strong> Domain requires admin approval (large domains)</li>
+                                <li><strong>approved:</strong> Domain has been validated and approved</li>
+                                <li><strong>rejected:</strong> Domain was rejected (see rejection_reason)</li>
+                            </ul>
+                            <p><strong>Processing Status Values:</strong></p>
+                            <ul>
+                                <li><strong>pending:</strong> Processing has not started yet</li>
+                                <li><strong>processing:</strong> Domain data is currently being processed</li>
+                                <li><strong>completed:</strong> Processing is complete, data is available</li>
+                                <li><strong>failed:</strong> Processing failed (contact support)</li>
+                            </ul>
+                            <p><strong>Source Values:</strong></p>
+                            <ul>
+                                <li><strong>api:</strong> Added via single domain API endpoint</li>
+                                <li><strong>api_bulk:</strong> Added via bulk upload API endpoint</li>
+                                <li><strong>csv:</strong> Added via dashboard file upload</li>
+                                <li><strong>manual:</strong> Added manually via dashboard</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Get Domain Status -->
+                    <div class="feature-card" id="get-domain-status">
+                        <h3><i class="fas fa-search"></i> Get Domain Status</h3>
+                        <p>Query the status of a specific domain. Use this endpoint to check whether a particular domain
+                            has been validated, view its processing status, or retrieve detailed information about a
+                            single domain without fetching the entire domain list.</p>
+                        <div class="code-example">
+                            <p><strong>Endpoint:</strong></p>
+                            <pre style="position: relative;"><code>GET /v2/partner/domains?domain={domain}</code><button class="copy-button" type="button" aria-label="Copy code to clipboard"><i class="fas fa-copy"></i></button></pre>
+                            <p><strong>Headers:</strong></p>
+                            <pre style="position: relative;"><code>X-API-Key: YOUR_API_KEY</code><button class="copy-button" type="button" aria-label="Copy code to clipboard"><i class="fas fa-copy"></i></button></pre>
+                            <p><strong>Request Example:</strong></p>
+                            <pre style="position: relative;"><code>curl -X GET "https://plus-api.xposedornot.com/v2/partner/domains?domain=example.com" \
+  -H "X-API-Key: abc123...xyz789"</code><button class="copy-button" type="button" aria-label="Copy code to clipboard"><i class="fas fa-copy"></i></button></pre>
+                            <p><strong>Success Response (200 OK):</strong></p>
+                            <pre style="position: relative;"><code>{
+  "plan": {
+    "tier": "Ultimate",
+    "domain_limit": 50,
+    "current_quota_used": 2,
+    "available_slots": 48
+  },
+  "total_count": 1,
+  "domains": [
+    {
+      "entry_id": "5640572144451584",
+      "domain": "example.com",
+      "status": "approved",
+      "processing_status": "completed",
+      "submitted_at": "2025-12-13T09:26:08.690515+00:00",
+      "verified_at": "2025-12-13T09:26:08.881731+00:00",
+      "rejection_reason": null,
+      "source": "api_bulk",
+      "record_count": 727
+    }
+  ]
+}</code><button class="copy-button" type="button" aria-label="Copy code to clipboard"><i class="fas fa-copy"></i></button></pre>
+                            <p><strong>Not Found Response:</strong></p>
+                            <p>If the domain is not found in your account:</p>
+                            <pre style="position: relative;"><code>{
+  "plan": {
+    "tier": "Ultimate",
+    "domain_limit": 50,
+    "current_quota_used": 2,
+    "available_slots": 48
+  },
+  "total_count": 0,
+  "domains": []
+}</code><button class="copy-button" type="button" aria-label="Copy code to clipboard"><i class="fas fa-copy"></i></button></pre>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="doc-section" id="threat-intelligence">
+                    <h2>Threat Intelligence Endpoints</h2>
+                    <p>The Threat Intelligence endpoints provide access to breach data and exposure information for
+                        emails and domains. Use these endpoints to check for compromised credentials, retrieve breach
+                        summaries, and generate security reports. All endpoints require authentication via the
+                        <code>X-API-Key</code> header.</p>
+
+                    <div class="feature-card" id="email-breach-check">
+                        <h3><i class="fas fa-envelope"></i> Email Breach Check</h3>
+                        <p>Query the breach database to check if an email address has been exposed in any known data
+                            breaches. By default, returns a list of breach IDs. Use the <code>?detailed=true</code> query
+                            parameter to get full breach information including exposed data types, breach dates, and
+                            risk assessments.</p>
+                        <div class="code-example">
+                            <p><strong>Endpoint:</strong></p>
+                            <pre style="position: relative;"><code>GET /v3/check-email/{email}</code><button class="copy-button" type="button" aria-label="Copy code to clipboard"><i class="fas fa-copy"></i></button></pre>
+                            <p><strong>Query Parameters:</strong></p>
+                            <ul>
+                                <li><strong>detailed</strong> (optional, boolean): Set to <code>true</code> to include full breach details. Defaults to <code>false</code>.</li>
+                            </ul>
+
+                            <p><strong>Request Example (Simple):</strong></p>
+                            <pre style="position: relative;"><code>curl -X GET "https://plus-api.xposedornot.com/v3/check-email/user@example.com" \
+  -H "x-api-key: YOUR_API_KEY" \
+  -H "Content-Type: application/json"</code><button class="copy-button" type="button" aria-label="Copy code to clipboard"><i class="fas fa-copy"></i></button></pre>
+                            <p><strong>Simple Response (default):</strong></p>
+                            <p>Returns only breach IDs as a list of strings:</p>
+                            <pre style="position: relative;"><code>{
+  "status": "success",
+  "email": "user@example.com",
+  "breaches": [
+    "ExampleBreach",
+    "AnotherBreach"
+  ]
+}</code><button class="copy-button" type="button" aria-label="Copy code to clipboard"><i class="fas fa-copy"></i></button></pre>
+
+                            <p><strong>Request Example (Detailed):</strong></p>
+                            <pre style="position: relative;"><code>curl -X GET "https://plus-api.xposedornot.com/v3/check-email/user@example.com?detailed=true" \
+  -H "x-api-key: YOUR_API_KEY" \
+  -H "Content-Type: application/json"</code><button class="copy-button" type="button" aria-label="Copy code to clipboard"><i class="fas fa-copy"></i></button></pre>
+                            <p><strong>Detailed Response (with <code>?detailed=true</code>):</strong></p>
+                            <pre style="position: relative;"><code>{
+  "status": "success",
+  "email": "user@example.com",
+  "breaches": [
+    {
+      "breach_id": "ExampleBreach",
+      "breached_date": "2023-01-15T00:00:00+00:00",
+      "logo": "https://xposedornot.com/static/logos/ExampleBreach.png",
+      "password_risk": "hardtocrack",
+      "searchable": "Yes",
+      "xposed_data": "Email addresses;Passwords;Names",
+      "xposed_records": 5000000,
+      "xposure_desc": "Description of the breach incident",
+      "domain": "example.com"
+    }
+  ]
+}</code><button class="copy-button" type="button" aria-label="Copy code to clipboard"><i class="fas fa-copy"></i></button></pre>
+                        </div>
+                    </div>
+
+                    <div class="feature-card" id="domain-breach-summary">
+                        <h3><i class="fas fa-globe"></i> Domain Breach Summary</h3>
+                        <p>Retrieve aggregated breach data for an entire domain, including yearly metrics,
+                            top breaches, and breach timeline. Ideal for client reporting and
+                            executive dashboards. Use <code>?details=true</code> to include per-breach details.</p>
+
+                        <div class="code-example">
+                            <p><strong>Endpoint (Summary):</strong></p>
+                            <pre style="position: relative;"><code>GET /v2/partner/domain-summary?domain={domain}</code><button class="copy-button" type="button" aria-label="Copy code to clipboard"><i class="fas fa-copy"></i></button></pre>
+                            <p><strong>Headers:</strong></p>
+                            <pre style="position: relative;"><code>X-API-Key: YOUR_API_KEY</code><button class="copy-button" type="button" aria-label="Copy code to clipboard"><i class="fas fa-copy"></i></button></pre>
+                            <p><strong>Query Parameters:</strong></p>
+                            <ul>
+                                <li><strong>domain</strong> (required): Domain name to check</li>
+                                <li><strong>details</strong> (optional, boolean): Set to <code>true</code> to include detailed breach information. Defaults to <code>false</code>.</li>
+                            </ul>
+                            <p><strong>Request Example:</strong></p>
+                            <pre style="position: relative;"><code>curl -X GET "https://plus-api.xposedornot.com/v2/partner/domain-summary?domain=example.com" \
+  -H "X-API-Key: YOUR_API_KEY"</code><button class="copy-button" type="button" aria-label="Copy code to clipboard"><i class="fas fa-copy"></i></button></pre>
+
+                            <p><strong>Endpoint (Detailed):</strong></p>
+                            <pre style="position: relative;"><code>GET /v2/partner/domain-summary?domain={domain}&amp;details=true</code><button class="copy-button" type="button" aria-label="Copy code to clipboard"><i class="fas fa-copy"></i></button></pre>
+                            <p><strong>Request Example:</strong></p>
+                            <pre style="position: relative;"><code>curl -X GET "https://plus-api.xposedornot.com/v2/partner/domain-summary?domain=example.com&amp;details=true" \
+  -H "X-API-Key: YOUR_API_KEY"</code><button class="copy-button" type="button" aria-label="Copy code to clipboard"><i class="fas fa-copy"></i></button></pre>
+
+                            <p><strong>Success Response (200 OK):</strong></p>
+                            <p>When the domain is approved and processing is complete:</p>
+                            <pre style="position: relative;"><code>{
+  "domain": "example.com",
+  "breach_count": 15,
+  "Yearly_Metrics": {
+    "2023": 8,
+    "2024": 5,
+    "2025": 2
+  },
+  "Yearly_Breach_Hierarchy": {
+    "description": "Breaches by Year",
+    "children": [
+      {
+        "description": "2024",
+        "tooltip": "5 breaches in 2024",
+        "children": [...]
+      }
+    ]
+  },
+  "Domain_Summary": {
+    "example.com": 1250
+  },
+  "Breach_Summary": {
+    "ExampleBreach": 500,
+    "AnotherBreach": 750
+  },
+  "Top10_Breaches": {
+    "AnotherBreach": 750,
+    "ExampleBreach": 500
+  },
+  "Detailed_Breach_Info": {
+    "ExampleBreach": {
+      "breached_date": "2023-01-15",
+      "xposed_data": "Email addresses;Passwords",
+      "xposed_records": 5000000
+    }
+  },
+  "Verified_Domains": ["example.com"]
+}</code><button class="copy-button" type="button" aria-label="Copy code to clipboard"><i class="fas fa-copy"></i></button></pre>
+                            <p><strong>Additional field with <code>?details=true</code>:</strong></p>
+                            <pre style="position: relative;"><code>"Breaches_Details": [
+  {
+    "breach": "ExampleBreach",
+    "domain": "example.com",
+    "email_count": 500,
+  }
+]</code><button class="copy-button" type="button" aria-label="Copy code to clipboard"><i class="fas fa-copy"></i></button></pre>
+
+                            <p><strong>Response Fields:</strong></p>
+                            <ul>
+                                <li><strong>breach_count:</strong> Total number of breaches across all years</li>
+                                <li><strong>Yearly_Metrics:</strong> Breach counts grouped by year</li>
+                                <li><strong>Yearly_Breach_Hierarchy:</strong> Nested hierarchy of breaches by year (for tree visualizations)</li>
+                                <li><strong>Domain_Summary:</strong> Exposed email count per domain</li>
+                                <li><strong>Breach_Summary:</strong> Exposed email count per breach</li>
+                                <li><strong>Top10_Breaches:</strong> Top 10 breaches by exposed email count</li>
+                                <li><strong>Detailed_Breach_Info:</strong> Metadata for each breach (dates, data types, record counts)</li>
+                                <li><strong>Verified_Domains:</strong> List of verified domains included in the query</li>
+                                <li><strong>Breaches_Details:</strong> (only with <code>details=true</code>) Per-breach, per-domain breakdown</li>
+                            </ul>
+
+                            <p><strong>Not Ready Response (404 Not Found):</strong></p>
+                            <p>When the domain is currently being processed or not yet complete:</p>
+                            <pre style="position: relative;"><code>{
+  "detail": "Domain is currently being processed. Please try again later."
+}</code><button class="copy-button" type="button" aria-label="Copy code to clipboard"><i class="fas fa-copy"></i></button></pre>
+                            <p>Other possible messages:</p>
+                            <ul>
+                                <li><code>"Domain processing failed. Please contact support."</code></li>
+                                <li><code>"This is a large domain and requires admin approval for processing. Please contact support."</code></li>
+                                <li><code>"Domain processing not started or incomplete. Please try again later."</code></li>
+                            </ul>
+
+                            <p><strong>Not Approved Response (403 Forbidden):</strong></p>
+                            <p>When the domain has not been approved for this partner:</p>
+                            <pre style="position: relative;"><code>{
+  "detail": "Domain not approved for this partner"
+}</code><button class="copy-button" type="button" aria-label="Copy code to clipboard"><i class="fas fa-copy"></i></button></pre>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="doc-section" id="authentication">
+                    <h2>Authentication</h2>
+                    <div class="feature-card">
+                        <h3><i class="fas fa-lock"></i> API Key Authentication</h3>
+                        <p>All Partner API requests require authentication using an API key. Include your API key in the
+                            <code>x-api-key</code> header of every request.</p>
+                        <div class="code-example">
+                            <p><strong>Header Format:</strong></p>
+                            <pre style="position: relative;"><code>x-api-key: YOUR_API_KEY_HERE</code><button class="copy-button" type="button" aria-label="Copy code to clipboard"><i class="fas fa-copy"></i></button></pre>
+                            <p><strong>Example with curl:</strong></p>
+                            <pre style="position: relative;"><code>curl -X GET "https://plus-api.xposedornot.com/v3/check-email/user@example.com" \
+  -H "x-api-key: abc123def456ghi789jkl" \
+  -H "Content-Type: application/json"</code><button class="copy-button" type="button" aria-label="Copy code to clipboard"><i class="fas fa-copy"></i></button></pre>
+                        </div>
+                        <p><strong>Important Security Notes:</strong></p>
+                        <ul>
+                            <li>Never expose API keys in client-side code or public repositories</li>
+                            <li>Rotate API keys regularly as part of security best practices</li>
+                            <li>Use separate API keys for different environments (dev, staging, production)</li>
+                            <li>Suspend keys immediately if you suspect unauthorized access</li>
+                            <li>Monitor key usage for unusual patterns or unexpected activity</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="doc-section" id="error-handling">
+                    <h2>Error Handling</h2>
+                    <div class="feature-card">
+                        <h3><i class="fas fa-exclamation-circle"></i> Error Responses</h3>
+                        <p>The Partner API uses standard HTTP status codes and returns detailed error messages in JSON
+                            format to help you diagnose and resolve issues quickly.</p>
+                        <div class="metrics-grid">
+                            <div class="metric-item">
+                                <h4>400 Bad Request</h4>
+                                <p>Invalid request format or parameters</p>
+                                <div class="code-example">
+                                    <pre style="position: relative;"><code>{
+  "detail": {
+    "status": "error",
+    "message": "Invalid email format"
+  }
+}</code><button class="copy-button" type="button" aria-label="Copy code to clipboard"><i class="fas fa-copy"></i></button></pre>
+                                </div>
+                            </div>
+                            <div class="metric-item">
+                                <h4>401 Unauthorized</h4>
+                                <p>Invalid or missing API key</p>
+                                <div class="code-example">
+                                    <pre style="position: relative;"><code>{
+  "detail": {
+    "status": "error",
+    "message": "Invalid API key"
+  }
+}</code><button class="copy-button" type="button" aria-label="Copy code to clipboard"><i class="fas fa-copy"></i></button></pre>
+                                </div>
+                            </div>
+                            <div class="metric-item">
+                                <h4>403 Forbidden</h4>
+                                <p>Suspended API key or insufficient permissions</p>
+                                <div class="code-example">
+                                    <pre style="position: relative;"><code>{
+  "detail": {
+    "status": "error",
+    "message": "API key suspended"
+  }
+}</code><button class="copy-button" type="button" aria-label="Copy code to clipboard"><i class="fas fa-copy"></i></button></pre>
+                                </div>
+                            </div>
+                            <div class="metric-item">
+                                <h4>429 Too Many Requests</h4>
+                                <p>Rate limit exceeded</p>
+                                <div class="code-example">
+                                    <pre style="position: relative;"><code>{
+  "detail": {
+    "status": "error",
+    "message": "Rate limit exceeded. Please try again later."
+  }
+}</code><button class="copy-button" type="button" aria-label="Copy code to clipboard"><i class="fas fa-copy"></i></button></pre>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="doc-section" id="rate-limits">
+                    <h2>Rate Limits &amp; Quotas</h2>
+                    <div class="feature-card">
+                        <h3><i class="fas fa-tachometer-alt"></i> Request Limits</h3>
+                        <p>Partner API access is subject to rate limits and monthly quotas based on your subscription
+                            tier. Monitor your usage through the API interface to avoid hitting limits.</p>
+                        <ul>
+                            <li><strong>Rate Limit:</strong> Maximum requests per minute varies by tier</li>
+                            <li><strong>Monthly Quota:</strong> Total API calls per month based on subscription</li>
+                            <li><strong>Burst Allowance:</strong> Short-term burst capacity for peak loads</li>
+                            <li><strong>Quota Reset:</strong> Monthly quota resets on subscription renewal date</li>
+                        </ul>
+                        <p><strong>Best Practices:</strong></p>
+                        <ul>
+                            <li>Implement exponential backoff for retries on rate limit errors</li>
+                            <li>Cache frequently accessed data to reduce API calls</li>
+                            <li>Use bulk endpoints when checking multiple items</li>
+                            <li>Monitor usage regularly and plan for quota increases if needed</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="doc-section">
+                    <h2>Getting Started</h2>
+                    <div class="steps-container">
+                        <div class="step">
+                            <div class="step-number">1</div>
+                            <div class="step-content">
+                                <h3>Access Partner API Interface</h3>
+                                <p>Navigate to ThreatIntel+ &gt; Partner API from the main menu to access the API key
+                                    management interface and usage monitoring dashboard.</p>
+                            </div>
+                        </div>
+                        <div class="step">
+                            <div class="step-number">2</div>
+                            <div class="step-content">
+                                <h3>Generate API Key</h3>
+                                <p>Click "Generate New API Key" button to create your first API key. Copy and securely
+                                    store the key - you'll need it for all API requests.</p>
+                            </div>
+                        </div>
+                        <div class="step">
+                            <div class="step-number">3</div>
+                            <div class="step-content">
+                                <h3>Test API Access</h3>
+                                <p>Make a test request to verify your API key works correctly. Start with a simple email
+                                    check endpoint to confirm authentication and connectivity.</p>
+                            </div>
+                        </div>
+                        <div class="step">
+                            <div class="step-number">4</div>
+                            <div class="step-content">
+                                <h3>Integrate with Your Tools</h3>
+                                <p>Begin integrating the Partner API into your security tools, SIEM platforms, or custom
+                                    applications. Use the code examples as starting points for your implementation.</p>
+                            </div>
+                        </div>
+                        <div class="step">
+                            <div class="step-number">5</div>
+                            <div class="step-content">
+                                <h3>Monitor Usage</h3>
+                                <p>Regularly check the usage dashboard to track API consumption, identify optimization
+                                    opportunities, and ensure you stay within quota limits.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="doc-section">
+                    <h2>Best Practices</h2>
+                    <div class="best-practices">
+                        <div class="practice-card">
+                            <h3><i class="fas fa-shield-alt"></i> Security</h3>
+                            <ul>
+                                <li>Never hardcode API keys in source code or configuration files</li>
+                                <li>Use environment variables or secure key management systems</li>
+                                <li>Rotate API keys regularly (every 90 days recommended)</li>
+                                <li>Create separate keys for different environments and applications</li>
+                                <li>Suspend unused keys immediately to reduce security exposure</li>
+                                <li>Monitor key usage for anomalies that could indicate compromise</li>
+                            </ul>
+                        </div>
+                        <div class="practice-card">
+                            <h3><i class="fas fa-code"></i> Development</h3>
+                            <ul>
+                                <li>Implement proper error handling for all API responses</li>
+                                <li>Use bulk endpoints for batch operations to optimize quota usage</li>
+                                <li>Cache results appropriately to minimize redundant API calls</li>
+                                <li>Implement exponential backoff for rate limit retries</li>
+                                <li>Log API requests and responses for debugging and auditing</li>
+                                <li>Test thoroughly in development before deploying to production</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+            <div class="content-footer">
+                <div class="next-prev">
+                    <a href="https://console.xposedornot.com/docs/threatintel/dashboard.html" class="prev-page"><i class="fas fa-arrow-left"></i> Partner Dashboard</a>
+                    <a href="https://console.xposedornot.com/docs/threatintel/index.html" class="next-page">Overview <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="./ThreatIntel+ API Guide - xonPlus_files/docs.js"></script>
+<script defer="" src="./ThreatIntel+ API Guide - xonPlus_files/v8c78df7c7c0f484497ecbca7046644da1771523124516" integrity="sha512-8DS7rgIrAmghBFwoOTujcf6D9rXvH8xm8JQ1Ja01h9QX8EzXldiszufYa4IFfKdLUKTTrnSFXLDkUEOTrZQ8Qg==" data-cf-beacon="{&quot;version&quot;:&quot;2024.11.0&quot;,&quot;token&quot;:&quot;d092c903a58b4fb89d1bd9e1f554db1a&quot;,&quot;server_timing&quot;:{&quot;name&quot;:{&quot;cfCacheStatus&quot;:true,&quot;cfEdge&quot;:true,&quot;cfExtPri&quot;:true,&quot;cfL4&quot;:true,&quot;cfOrigin&quot;:true,&quot;cfSpeedBrain&quot;:true},&quot;location_startswith&quot;:null}}" crossorigin="anonymous"></script>
+
+
+
+</body></html>

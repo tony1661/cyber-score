@@ -28,6 +28,9 @@ obj/
 *.log
 *.tmp
 
+# Claude Code local settings
+.claude/
+
 # Environment variables
 .env
 .env.local

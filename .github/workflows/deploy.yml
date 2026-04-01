@@ -23,12 +23,20 @@ jobs:
 
             git pull origin main
 
+            # Ensure required storage directories exist
+            mkdir -p storage/framework/sessions \
+                     storage/framework/cache \
+                     storage/framework/views \
+                     storage/logs \
+                     storage/app/public \
+                     bootstrap/cache
+
             composer install --no-dev --optimize-autoloader --no-interaction
 
             npm ci
             npm run build
 
-            php artisan migrate --force
-            php artisan config:cache
-            php artisan route:cache
-            php artisan view:cache
+            /usr/bin/php artisan migrate --force
+            /usr/bin/php artisan config:cache
+            /usr/bin/php artisan route:cache
+            /usr/bin/php artisan view:cache

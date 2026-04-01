@@ -31,6 +31,9 @@ chown cyberapp:cyberapp /var/www/cyber-score
 
 # Allow www-data (nginx/php-fpm) to read app files
 usermod -aG cyberapp www-data
+
+# Set a password for the user (required for Github Actions to work)
+passwd cyberapp
 ```
 
 ## 3 — Clone and configure
@@ -177,6 +180,8 @@ Every push to `main` will automatically deploy to your server via the included `
 ssh-keygen -t ed25519 -f ~/.ssh/deploy_key -N ""
 cat ~/.ssh/deploy_key.pub >> ~/.ssh/authorized_keys
 cat ~/.ssh/deploy_key   # copy this into the SSH_KEY secret below
+chmod 700 ~/.ssh
+chmod 600 ~/.ssh/authorized_keys
 ```
 
 ### Step 2 — Add secrets to your GitHub repo

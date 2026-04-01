@@ -167,7 +167,7 @@ certbot --nginx -d yourdomain.com
 
 ---
 
-## Auto-deploy with GitHub Actions
+## 10 — Auto-deploy with GitHub Actions
 
 Every push to `main` will automatically deploy to your server via the included `.github/workflows/deploy.yml`.
 
@@ -200,7 +200,7 @@ Watch the run under the **Actions** tab in your GitHub repo.
 
 ---
 
-## Updating the app
+## 11 — Manual Deploy / Updating the app
 
 ```bash
 su - cyberapp

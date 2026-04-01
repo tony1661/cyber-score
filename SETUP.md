@@ -167,6 +167,39 @@ certbot --nginx -d yourdomain.com
 
 ---
 
+## Auto-deploy with GitHub Actions
+
+Every push to `main` will automatically deploy to your server via the included `.github/workflows/deploy.yml`.
+
+### Step 1 — Generate a deploy key on the server
+
+```bash
+ssh-keygen -t ed25519 -f ~/.ssh/deploy_key -N ""
+cat ~/.ssh/deploy_key.pub >> ~/.ssh/authorized_keys
+cat ~/.ssh/deploy_key   # copy this into the SSH_KEY secret below
+```
+
+### Step 2 — Add secrets to your GitHub repo
+
+Go to your repo → **Settings → Secrets and variables → Actions → New repository secret** and add:
+
+| Secret | Value |
+|---|---|
+| `SSH_HOST` | your server IP or domain |
+| `SSH_USER` | `cyberapp` |
+| `SSH_KEY` | contents of `~/.ssh/deploy_key` (the private key) |
+| `SSH_PORT` | `22` (or your custom port) |
+
+### Step 3 — Push to trigger a deploy
+
+```bash
+git push origin main
+```
+
+Watch the run under the **Actions** tab in your GitHub repo.
+
+---
+
 ## Updating the app
 
 ```bash
